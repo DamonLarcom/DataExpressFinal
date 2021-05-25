@@ -1,0 +1,24 @@
+{
+  "name": "dataexpress",
+  "version": "1.0.0",
+  "description": "final project for interactive web dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LarcomLabs/DataExpressFinal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LarcomLabs/DataExpressFinal/issues"
+  },
+  "homepage": "https://github.com/LarcomLabs/DataExpressFinal#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.11",
+    "pug": "^3.0.2"
+  }
+}
