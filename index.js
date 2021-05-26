@@ -1,0 +1,16 @@
+const express = require('express');
+const routes = require('./routes/routes');
+const path = require('path');
+const { url } = require('inspector');
+
+const app = express();
+
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+let urlencodedParser = express.urlencoded({
+    extended: true
+});
+
+app.get('/', routes.login);
+app.get('')

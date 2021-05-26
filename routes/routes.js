@@ -24,3 +24,38 @@ let userSchema = mongoose.Schema({
 });
 
 let User = mongoose.model('User_Collection', userSchema);
+
+exports.login = (req, res) => {
+
+}
+
+exports.createUser = (req, res) => {
+    let user = new User({
+        username: req.body.username,
+        password: req.body.password,
+        email : req.body.email,
+        age : req.body.age,
+        q1Ans: req.body.q1Ans,
+        q2Ans: req.body.q2Ans,
+        q3Ans: req.body.q3Ans
+    });
+    user.save()
+};
+
+exports.editUser = (req, res) > {
+    User.findById(req.params.username, (err, user) => {
+        if(err) return console.error(err);
+        user.username = req.body.username;
+        user.password = req.body.password;
+        user.email = req.body.email;
+        user.age = req.body.age;
+        user.q1Ans = req.body.q1Ans;
+        user.q2Ans = req.body.q2Ans;
+        user.q3Ans = req.body.q3Ans;
+        user.save((err, user) => {
+          if(err) return console.error(err);
+          console.log(req.body.username + ' updated.');
+        });
+        res.redirect('/');
+      })
+}
