@@ -13,4 +13,5 @@ let urlencodedParser = express.urlencoded({
 });
 
 app.get('/', routes.login);
-app.get('')
+app.get('/signup', urlencodedParser, routes.signup);
+app.get('/login', urlencodedParser, routes.login);

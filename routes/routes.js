@@ -29,6 +29,10 @@ exports.login = (req, res) => {
 
 }
 
+exports.signup = (req, res) => {
+
+}
+
 exports.createUser = (req, res) => {
     let user = new User({
         username: req.body.username,
@@ -39,10 +43,13 @@ exports.createUser = (req, res) => {
         q2Ans: req.body.q2Ans,
         q3Ans: req.body.q3Ans
     });
-    user.save()
+    user.save((err, user) => {
+        if(err) return console.error(err);
+        console.log(req.body.username + ' created');
+    })
 };
 
-exports.editUser = (req, res) > {
+exports.editUser = (req, res) => {
     User.findById(req.params.username, (err, user) => {
         if(err) return console.error(err);
         user.username = req.body.username;
