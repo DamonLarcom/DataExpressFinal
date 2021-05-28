@@ -3,7 +3,7 @@ extends layout
 block content
     head 
     body
-        form(method='post' action='/')
+        form(method='post' action='/signup')
             p Username:
                 br
                 input(name='username' type='text')
@@ -16,23 +16,23 @@ block content
             p Password:
                 br
                 input(name='password' type='text')
-            p Multiple Choice 1
-                br
-                input(name='answerAfor1' type='radio')
-                input(name='answerBfor1' type='radio')
-                input(name='answerCfor1' type='radio')
-                input(name='answerDfor1' type='radio')
-            p Multiple Choice 2
-                br
-                input(name='answerAfor2' type='radio')
-                input(name='answerBfor2' type='radio')
-                input(name='answerCfor2' type='radio')
-                input(name='answerDfor2' type='radio')
-            p Multiple Choice 3
-                br
-                input(name='answerAfor3' type='radio')
-                input(name='answerBfor3' type='radio')
-                input(name='answerCfor3' type='radio')
-                input(name='answerDfor3' type='radio')    
+            p What is your favorite primary color?
+                select(name="colors") 
+                    option(name='Red')
+                    option(name='Blue')
+                    option(value='Yellow')
+                    option(value="I hate colors")
+            p What is your meal of the day?
+                select(name="meal")
+                    option(name='Breakfast')
+                    option(name='Lunch')
+                    option(name='Dinner/Supper')
+                    option(name='I eat when I want to')
+            p Batman or Superman?
+                select(name='Batman or Superman')
+                    option(name='Batman, Duh.')
+                    option(name='Easy, Superman.')
+                    option(name='Captain America.')
+                    option(name='Who?')    
             p
                 input(type='submit' value='Sign Up')
