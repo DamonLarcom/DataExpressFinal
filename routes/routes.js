@@ -9,7 +9,7 @@ mongoose.connect('mongodb+srv://Jeremie:Jeremiecius5@finalprojectcluster.o2zvn.m
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
-let db = mongoose.connection;
+let mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error'));
 mdb.once('open', callback => {});
 
