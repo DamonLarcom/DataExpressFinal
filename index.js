@@ -5,6 +5,10 @@ const { url } = require('inspector');
 
 const app = express();
 
+const app = express();
+const cookieParser = require('cookie-parser');
+app.use(cookieParser('parser'));
+
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
