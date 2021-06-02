@@ -40,7 +40,7 @@ exports.signup = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-    let cookie =req.cookies.welcome
+    let cookie = req.cookies.welcome
         res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
         res.render('welcome', {title:'welcome', cookie})
     let salt = bcrypt.genSaltSync(10);
@@ -60,10 +60,13 @@ exports.createUser = (req, res) => {
     })
 };
 
-exports.editUser = (req, res) => {
+exports.edit = (req, res) => {
     let cookie = req.cookies.edit
         res.cookie('edit', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
         res.render('edit', {title:'edit', cookie})
+};
+
+exports.editUser = (req, res) => {
     User.findById(req.params.username, (err, user) => {
         if(err) return console.error(err);
         user.username = req.body.username;
