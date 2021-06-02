@@ -29,22 +29,22 @@ let userSchema = mongoose.Schema({
 let User = mongoose.model('User_Collection', userSchema);
 
 exports.login = (req, res) => {
-    let cookie = req.cookies.welcome
-    res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.cookie('signup', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.cookie('login', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.cookie('edit', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.render('welcome', {title:'welcome', cookie})
-    res.render('login', {title:'login', cookie})
-    res.render('signup', {title:'signup', cookie})
-    res.render('edit', {title:'edit', cookie})
+    let cookie =req.cookies.login
+        res.cookie('login', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        res.render('login', {title:'login', cookie})
 }
 
 exports.signup = (req, res) => {
+    let cookie =req.cookies.signup
+        res.cookie('signup', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        res.render('signup', {title:'signup', cookie})
     res.render('signup');
 }
 
 exports.createUser = (req, res) => {
+    let cookie =req.cookies.welcome
+        res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        res.render('welcome', {title:'welcome', cookie})
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(req.body.password, salt);
     let user = new User({
@@ -63,6 +63,9 @@ exports.createUser = (req, res) => {
 };
 
 exports.editUser = (req, res) => {
+    let cookie =req.cookies.edit
+        res.cookie('edit', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        res.render('edit', {title:'edit', cookie})
     User.findById(req.params.username, (err, user) => {
         if(err) return console.error(err);
         user.username = req.body.username;
