@@ -1,9 +1,13 @@
 extends layout 
 
 block content
+  div(id='body')
     p Last Visited on #{cookie} 
     p 
-        td 
-          a(href='/edit/' + user.id) Update Information
+      td 
+        a(href='/edit/' + user.id) Update Information
+
+    p(id='stats') Statistics between users 
+    br
     p
-          input(type='submit' value='Log out')
+      input(type='submit' value='Log out')
