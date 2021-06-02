@@ -3,7 +3,6 @@ const routes = require('./routes/routes');
 const path = require('path');
 const { url } = require('inspector');
 
-const app = express();
 
 const app = express();
 const cookieParser = require('cookie-parser');
