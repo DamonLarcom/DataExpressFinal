@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 
 mongoose.connect('mongodb+srv://Jeremie:Jeremiecius5@finalprojectcluster.o2zvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
