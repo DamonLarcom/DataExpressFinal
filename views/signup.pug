@@ -1,7 +1,7 @@
 extends layout 
 
 block content
-        form(id='Fvalue' method='post' action='/signup')
+        form(id='Fvalue' method='post' action='/create')
             p Username:
                 br
                 input(name='username' type='text')
@@ -16,7 +16,6 @@ block content
                 input(name='password' type='text')
             p What is your favorite primary color?
                 select(name="colors") 
-
                     option(name='Red') Red
                     option(name='Blue') Blue
                     option(value='Yellow') Yellow
@@ -33,4 +32,4 @@ block content
                     option(name='Captain America') Captain America   
             p
                 input(type='submit' value='Sign Up')
-            p Last Visited on #{cookie}
+        p Last Visited on #{cookie}
