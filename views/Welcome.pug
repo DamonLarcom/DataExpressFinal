@@ -1,7 +1,7 @@
 extends layout 
 
 block content
-    p Last Visited on  
+    p Last Visited on #{cookie} 
     p 
         td 
           a(href='/edit/' + user.id) Update Information
