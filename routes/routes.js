@@ -1,15 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-
 const cookieParser = require('cookie-parser');
-
-
 const bcrypt = require('bcryptjs');
-
-
-console.log(salt);
-console.log(hash);
 
 mongoose.connect('mongodb+srv://Jeremie:Jeremiecius5@finalprojectcluster.o2zvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useUnifiedTopology : true,
@@ -36,7 +29,7 @@ let userSchema = mongoose.Schema({
 let User = mongoose.model('User_Collection', userSchema);
 
 exports.login = (req, res) => {
-    let cookie =req.cookies.welcome
+    let cookie = req.cookies.welcome
     res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
     res.cookie('signup', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
     res.cookie('login', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
@@ -48,7 +41,7 @@ exports.login = (req, res) => {
 }
 
 exports.signup = (req, res) => {
-
+    res.render('signup');
 }
 
 exports.createUser = (req, res) => {
