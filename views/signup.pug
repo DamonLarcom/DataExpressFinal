@@ -1,9 +1,7 @@
 extends layout 
 
 block content
-    head 
-    body
-        form(method='post' action='/signup')
+        form(id='Fvalue' method='post' action='/signup')
             p Username:
                 br
                 input(name='username' type='text')
@@ -18,21 +16,21 @@ block content
                 input(name='password' type='text')
             p What is your favorite primary color?
                 select(name="colors") 
-                    option(name='Red')
-                    option(name='Blue')
+                    option(value='Red')
+                    option(value='Blue')
                     option(value='Yellow')
                     option(value="I hate colors")
-            p What is your meal of the day?
+            p What is your favorite meal of the day?
                 select(name="meal")
-                    option(name='Breakfast')
-                    option(name='Lunch')
-                    option(name='Dinner/Supper')
-                    option(name='I eat when I want to')
+                    option(value='Breakfast')
+                    option(value='Lunch')
+                    option(value='Dinner/Supper')
+                    option(value='I eat when I want to')
             p Batman or Superman?
                 select(name='Batman or Superman')
-                    option(name='Batman, Duh.')
-                    option(name='Easy, Superman.')
-                    option(name='Captain America.')
-                    option(name='Who?')    
+                    option(value='Batman, Duh') Batman, Duh.
+                    option(value='Easy, Superman') Easy, Superman.
+                    option(value='Captain America') Captain America.
+                    option(value='Who?') ...Who?
             p
                 input(type='submit' value='Sign Up')
