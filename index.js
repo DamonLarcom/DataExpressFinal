@@ -9,15 +9,16 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser('parser'));
 
 app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
 let urlencodedParser = express.urlencoded({
     extended: true
 });
 
-app.get('/', routes.welcome);
+app.get('/', routes.login);
 app.get('/signup', urlencodedParser, routes.signup);
-app.get('/login', urlencodedParser, routes.login);
-app.get('/login', urlencodedParser, routes.edit);
+app.post('/edit/:username', urlencodedParser, routes.editUser);
+app.post('/create', routes.createUser);
 
 app.listen(3000);
