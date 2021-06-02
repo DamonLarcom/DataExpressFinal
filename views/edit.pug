@@ -1,6 +1,7 @@
 extends layout 
 
-block content
+
+block content 
     form(id='form' method='post' action='/edit/' + user.id) 
         p Username:
             br
@@ -17,23 +18,21 @@ block content
         p What is your favorite primary color?
             select(name="colors")
                 option(select = user.q1Ans)=user.q1Ans
-                option(value='Red')
-                option(value='Blue')
-                option(value='Yellow')
-                option(value="I hate colors")
+                option(name='Red') Red
+                option(name='Blue') Blue
+                option(value='Yellow') Yellow
+                option(value="I hate colors") I hate colors
         p What is your meal of the day?
             select(name="meal")
                 option(select = user.q2Ans)=user.q2Ans 
-                option(value='Breakfast')
-                option(value='Lunch')
-                option(value='Dinner/Supper')
-                option(value='I eat when I want to')
+                option(name='Breakfast') Breakfast
+                option(name='Lunch') Lunch
+                option(name='Dinner') Dinner
         p Batman or Superman?
             select(name='Batman or Superman')
                 option(select = user.q3Ans)=user.q3Ans
-                option(value='Batman, Duh.')
-                option(value='Easy, Superman.')
-                option(value='Captain America.')
-                option(value='Who?')      
-        p
-            input(type='submit' value='Save')
+                option(name='Batman') Batman, Duh.
+                option(name='Superman') Easy, Superman.
+                option(name='Captain America') Captain America
+        p Last Visited on #{cookie}
+

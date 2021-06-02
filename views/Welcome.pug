@@ -2,7 +2,7 @@ extends layout
 
 block content
   div(id='body')
-    p Last Visited on
+    p Last Visited on #{cookie} 
     p 
       td 
         a(href='/edit/' + user.id) Update Information
