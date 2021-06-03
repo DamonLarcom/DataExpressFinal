@@ -44,6 +44,7 @@ exports.createUser = (req, res) => {
         res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
         res.render('welcome', {title:'welcome', cookie})
     let salt = bcrypt.genSaltSync(10);
+    console.log(req.body);
     let hash = bcrypt.hashSync(req.body.password, salt);
     let user = new User({
         username: req.body.username,

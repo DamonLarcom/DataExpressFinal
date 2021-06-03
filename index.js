@@ -20,6 +20,6 @@ app.get('/', routes.login);
 app.get('/signup', urlencodedParser, routes.signup);
 app.get('/edit/:username', urlencodedParser, routes.edit);
 app.post('/edit/:username', urlencodedParser, routes.editUser);
-app.post('/create', routes.createUser);
+app.post('/create', urlencodedParser, routes.createUser);
 
 app.listen(3000);
