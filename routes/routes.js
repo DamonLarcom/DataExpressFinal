@@ -20,9 +20,9 @@ let userSchema = mongoose.Schema({
     password: String,
     email: String,
     age: String,
-    q1Ans: String,
-    q2Ans: String,
-    q3Ans: String
+    color: String,
+    meal: String,
+    superhero: String
 });
 
 let User = mongoose.model('User_Collection', userSchema);
