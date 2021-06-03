@@ -62,8 +62,15 @@ exports.createUser = (req, res) => {
     });
     user.save((err, user) => {
         if(err) return console.error(err);
+        res.json ({
+            title: 'user stats',
+            color: color,
+            meal: meal,
+            superhero: superhero;
+        });
         console.log(req.body.username + ' created');
     })
+    res.json({})
 };
 
 exports.edit = (req, res) => {
