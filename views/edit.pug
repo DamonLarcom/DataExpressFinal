@@ -15,24 +15,24 @@ block content
             br
             input(name='password' type='text' value=user.password)
         p What is your favorite primary color?
-            select(name="colors")
+            select(name="colors" id ='category1')
                 option(select = user.q1Ans)=user.q1Ans
                 option(name='Red') Red
                 option(name='Blue') Blue
                 option(value='Yellow') Yellow
                 option(value="I hate colors") I hate colors
         p What is your meal of the day?
-            select(name="meal")
+            select(name="meal" id ='category2')
                 option(select = user.q2Ans)=user.q2Ans 
                 option(name='Breakfast') Breakfast
                 option(name='Lunch') Lunch
                 option(name='Dinner') Dinner
         p Batman or Superman?
-            select(name='Batman or Superman')
+            select(name='Batman or Superman' id ='category3')
                 option(select = user.q3Ans)=user.q3Ans
                 option(name='Batman') Batman, Duh.
                 option(name='Superman') Easy, Superman.
                 option(name='Captain America') Captain America
         p
-            input(type='submit' value='Save')        
+            input(type='submit' value='Save' id ='submit')        
         p Last Visited on #{cookie}
