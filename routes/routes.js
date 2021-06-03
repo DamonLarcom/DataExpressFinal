@@ -27,6 +27,17 @@ let userSchema = mongoose.Schema({
 
 let User = mongoose.model('User_Collection', userSchema);
 
+exports.logout = (req, res) => {
+    res.session.destroy = (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log('logged out.')
+            res.redirect('/');
+        }
+    }
+}
+
 exports.login = (req, res) => {
     let cookie = req.cookies.login;
     res.cookie('login', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
@@ -41,7 +52,20 @@ exports.signup = (req, res) => {
 
 //AUTHENTICATE USER, BEGIN SESSION
 exports.auth = (req, res) => {
-
+    User.findById({username: req.body.username}, (err, user) => {
+        if(user) {
+            bcrypt.compareSync(req.body.password, user.password, (err, matched) => {
+                if(matched) {
+                    req.session.user = {
+                        isAuthenticated : true,
+                        username: req.body.username
+                    }
+                }
+            })
+        } else {
+            res.redirect('/');
+        }
+    });
 };
 
 exports.createUser = (req, res) => {
@@ -56,21 +80,14 @@ exports.createUser = (req, res) => {
         password: hash,
         email : req.body.email,
         age : req.body.age,
-        q1Ans: req.body.q1Ans,
-        q2Ans: req.body.q2Ans,
-        q3Ans: req.body.q3Ans
+        color: req.body.color,
+        meal: req.body.meal,
+        superhero: req.body.superhero
     });
     user.save((err, user) => {
         if(err) return console.error(err);
-        res.json ({
-            title: 'user stats',
-            color: color,
-            meal: meal,
-            superhero: superhero;
-        });
         console.log(req.body.username + ' created');
     })
-    res.json({})
 };
 
 exports.edit = (req, res) => {
@@ -86,9 +103,9 @@ exports.editUser = (req, res) => {
         user.password = hash;
         user.email = req.body.email;
         user.age = req.body.age;
-        user.q1Ans = req.body.q1Ans;
-        user.q2Ans = req.body.q2Ans;
-        user.q3Ans = req.body.q3Ans;
+        user.color = req.body.color;
+        user.meal = req.body.meal;
+        user.superhero = req.body.superhero;
         user.save((err, user) => {
           if(err) return console.error(err);
           console.log(req.body.username + ' updated.');

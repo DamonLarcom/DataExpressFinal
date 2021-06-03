@@ -6,11 +6,20 @@ const { url } = require('inspector');
 
 const app = express();
 const cookieParser = require('cookie-parser');
+const { userInfo } = require('os');
 app.use(cookieParser('parser'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
+
+const getAuth = (req, res, next) => {
+    if(res.session.user && req.session.user.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+};
 
 let urlencodedParser = express.urlencoded({
     extended: true
