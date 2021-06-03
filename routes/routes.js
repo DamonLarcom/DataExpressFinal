@@ -39,6 +39,11 @@ exports.signup = (req, res) => {
     res.render('signup', {title:'signup', cookie})
 }
 
+//AUTHENTICATE USER, BEGIN SESSION
+exports.auth = (req, res) => {
+
+};
+
 exports.createUser = (req, res) => {
     let cookie = req.cookies.welcome
         res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)

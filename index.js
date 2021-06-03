@@ -17,6 +17,7 @@ let urlencodedParser = express.urlencoded({
 });
 
 app.get('/', routes.login);
+app.post('/', urlencodedParser, routes.auth);
 app.get('/signup', urlencodedParser, routes.signup);
 app.get('/edit/:username', urlencodedParser, routes.edit);
 app.post('/edit/:username', urlencodedParser, routes.editUser);
