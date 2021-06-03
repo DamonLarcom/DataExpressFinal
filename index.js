@@ -32,4 +32,7 @@ app.get('/edit/:username', urlencodedParser, routes.edit);
 app.post('/edit/:username', urlencodedParser, routes.editUser);
 app.post('/create', urlencodedParser, routes.createUser);
 
+app.get('/api', routes.api);
+app.post('/api', urlencodedParser, routes.createUser);
+
 app.listen(3000);
