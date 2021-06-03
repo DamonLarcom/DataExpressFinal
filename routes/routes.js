@@ -63,6 +63,7 @@ exports.auth = (req, res) => {
                 }
             })
         } else {
+            console.log("No user found")
             res.redirect('/');
         }
     });
