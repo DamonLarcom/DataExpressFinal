@@ -52,16 +52,15 @@ exports.signup = (req, res) => {
 
 //AUTHENTICATE USER, BEGIN SESSION
 exports.auth = (req, res) => {
-    User.findById({username: req.body.username}, (err, user) => {
+    User.findOne({username: req.body.username}, (err, user) => {
         if(user) {
-            bcrypt.compareSync(req.body.password, user.password, (err, matched) => {
-                if(matched) {
-                    req.session.user = {
-                        isAuthenticated : true,
-                        username: req.body.username
-                    }
-                }
-            })
+            let matched = bcrypt.compareSync(req.body.password, user.password);
+            console.log(matched);
+            res.session.user = {
+                isAuthenticated: true,
+                username: req.body.username
+            }
+            res.redirect('/welcome')
         } else {
             console.log("No user found")
             res.redirect('/');
@@ -69,10 +68,13 @@ exports.auth = (req, res) => {
     });
 };
 
-exports.createUser = (req, res) => {
+exports.welcome = (req, res) => {
     let cookie = req.cookies.welcome
-        res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-        res.render('welcome', {title:'welcome', cookie})
+    res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+    res.render('welcome', {title:'welcome', cookie})
+}
+
+exports.createUser = (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     console.log(req.body);
     let hash = bcrypt.hashSync(req.body.password, salt);
@@ -87,8 +89,10 @@ exports.createUser = (req, res) => {
     });
     user.save((err, user) => {
         if(err) return console.error(err);
+        console.log(hash);
         console.log(req.body.username + ' created');
     })
+    res.redirect('/');
 };
 
 exports.edit = (req, res) => {
