@@ -115,6 +115,22 @@ exports.editUser = (req, res) => {
       })
 }
 
+exports.api = (req, res) => {
+    let response = {
+        mostCommon: {
+            color: User.find(),
+            meal: User.find(),
+            superhero: User.find()
+        },
+        leastCommon : {
+            color: User.find(),
+            meal: User.find(),
+            superhero: User.find()
+        }
+    }
+    res.json(response);
+}
+
 
 
 
