@@ -11,6 +11,7 @@ const { userInfo } = require('os');
 app.use(cookieParser('parser'));
 app.use(expressSession({
     secret: 'IW3bDeV',
+    rolling: true,
     saveUninitialized: true,
     resave: true
 }))
