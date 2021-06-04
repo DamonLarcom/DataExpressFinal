@@ -41,10 +41,7 @@ app.get('/signup', urlencodedParser, routes.signup);
 app.get('/edit', urlencodedParser, routes.edit);
 app.post('/edit', urlencodedParser, routes.editUser);
 app.post('/create', urlencodedParser, routes.createUser);
-
 app.get('/api', routes.api);
-app.post('/api', urlencodedParser, routes.createUser);
-
 app.get('/logout', routes.logout);
 
 app.listen(3000);
