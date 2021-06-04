@@ -35,4 +35,14 @@ app.post('/create', urlencodedParser, routes.createUser);
 app.get('/api', routes.api);
 app.post('/api', urlencodedParser, routes.createUser);
 
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.redirect('/');
+        }
+    });
+});
+
 app.listen(3000);
