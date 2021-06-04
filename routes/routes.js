@@ -132,6 +132,21 @@ exports.api = (req, res) => {
 }
 
 
-
+exports.api = (req, res) => {
+    User.find({
+        mostCommon: {
+        color: User.find(),
+        meal: User.find(),
+        superhero: User.find()
+        },
+        leastCommon: {
+            color: User.find(),
+            meal: User.find(),
+            superhero: User.find()
+        }
+}, (err, responses) => {
+            res.json(responses)
+        })
+}
 
 
