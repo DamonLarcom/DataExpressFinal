@@ -2,12 +2,11 @@ extends layout
 
 block content
   div(id='body')
-    p Last Visited on #{cookie} 
     p 
       td 
-        a(href='/edit/:username') Update Information
-
+        a(href='/edit') Update Information
     p(id='stats') Statistics between users 
     br
     p
-      a(href='/logout') Log Out
+      button(onclick='location.href="/logout"') Log Out
+    p Last Visited on #{cookie} 

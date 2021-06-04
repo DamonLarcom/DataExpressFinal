@@ -28,26 +28,27 @@ let userSchema = mongoose.Schema({
 let User = mongoose.model('User_Collection', userSchema);
 
 exports.logout = (req, res) => {
-    res.session.destroy = (err) => {
+    req.session.destroy(err => {
         if(err) {
             console.log(err);
         } else {
-            console.log('logged out.')
+            console.log('logged out');
             res.redirect('/');
         }
-    }
+    });
+    
 }
 
 exports.login = (req, res) => {
     let cookie = req.cookies.login;
     res.cookie('login', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.render('login', {title:'login', cookie})
+    res.render('login', {title:'Login', cookie})
 }
 
 exports.signup = (req, res) => {
     let cookie =req.cookies.signup
     res.cookie('signup', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.render('signup', {title:'signup', cookie})
+    res.render('signup', {title:'Signup', cookie})
 }
 
 //AUTHENTICATE USER, BEGIN SESSION
@@ -56,10 +57,19 @@ exports.auth = (req, res) => {
         if(user) {
             let matched = bcrypt.compareSync(req.body.password, user.password);
             console.log(matched);
-            res.session.user = {
-                isAuthenticated: true,
-                username: req.body.username
+            if(matched) {
+                req.session.user = {
+                    isAuthenticated: true,
+                    username: user.username,
+                    password: user.password,
+                    email: user.email,
+                    age: user.age,
+                    color: user.color,
+                    meal: user.meal,
+                    superhero: user.superhero
+                }
             }
+            console.log(req.session.user)
             res.redirect('/welcome')
         } else {
             console.log("No user found")
@@ -71,7 +81,7 @@ exports.auth = (req, res) => {
 exports.welcome = (req, res) => {
     let cookie = req.cookies.welcome
     res.cookie('welcome', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-    res.render('welcome', {title:'welcome', cookie})
+    res.render('welcome', {title:'Welcome', cookie})
 }
 
 exports.createUser = (req, res) => {
@@ -98,59 +108,65 @@ exports.createUser = (req, res) => {
 exports.edit = (req, res) => {
     let cookie = req.cookies.edit
         res.cookie('edit', `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
-        res.render('edit', {title:'edit', cookie})
+        res.render('edit', {title:'Edit User', cookie, session: req.session.user})
 };
 
 exports.editUser = (req, res) => {
-    User.findById(req.params.username, (err, user) => {
-        if(err) return console.error(err);
-        user.username = req.body.username;
-        user.password = hash;
-        user.email = req.body.email;
-        user.age = req.body.age;
-        user.color = req.body.color;
-        user.meal = req.body.meal;
-        user.superhero = req.body.superhero;
-        user.save((err, user) => {
-          if(err) return console.error(err);
-          console.log(req.body.username + ' updated.');
-        });
-        res.redirect('/');
-      })
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(req.body.password, salt);
+    User.findOneAndUpdate({username: req.body.username},{
+        username : req.body.username,
+        password : hash,
+        email : req.body.email,
+        age : req.body.age,
+        color : req.body.color,
+        meal : req.body.meal,
+        superhero : req.body.superhero
+    }, (err) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(req.body.username + ' updated.')
+        }
+    });
+    res.redirect('/');
 }
 
 exports.api = (req, res) => {
-    let response = {
-        mostCommon: {
-            color: User.find(),
-            meal: User.find(),
-            superhero: User.find()
-        },
-        leastCommon : {
-            color: User.find(),
-            meal: User.find(),
-            superhero: User.find()
-        }
-    }
-    res.json(response);
-}
 
-
-exports.api = (req, res) => {
-    User.find({
-        mostCommon: {
-        color: User.find(),
-        meal: User.find(),
-        superhero: User.find()
-        },
-        leastCommon: {
-            color: User.find(),
-            meal: User.find(),
-            superhero: User.find()
+    let result = User.aggregate([
+        {
+            $facet: {
+                colors: [
+                    {
+                        $group: {
+                            _id: '$color',
+                            total: {$sum: 1}
+                        }
+                    },
+                    {$sort: {total: -1}}
+                ],
+                meals: [
+                    {
+                        $group: {
+                            _id: '$meal',
+                            total: {$sum : 1}
+                        }
+                    },
+                    {$sort: {total: -1}}
+                ],
+                superheroes : [
+                    {
+                        $group: {
+                            _id: '$superhero',
+                            total: {$sum: 1}
+                        },
+                    },
+                    {$sort: {total: -1}}
+                ]
+            }
         }
-}, (err, responses) => {
-            res.json(responses)
-        })
+    ], (err, stuff) =>{ res.json(stuff) });
 }
 
 

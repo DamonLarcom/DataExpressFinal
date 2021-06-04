@@ -1,11 +1,13 @@
 html {
-    background-color: rgba(88, 88, 163, 0.993);
+    background-color: #121212;
+    color: #EAEAEA;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: auto;
 }
 
-#Form {
-    background-color: bisque;
-    padding-left: 30%;
+form {
+    background-color: #1e1e1e;
+    margin: auto;
 }
 
 #stats {
@@ -13,6 +15,17 @@ html {
 }
 
 #body {
-    background-color: bisque;
+    background-color: #1e1e1e;
 
+}
+
+p {
+    color: #EAEAEA;
+}
+
+button {
+    border: 1px solid black;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #121212, #EAEAEA);
+    padding: 5px;
 }

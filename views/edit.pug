@@ -1,37 +1,38 @@
 extends layout 
 
 block content 
-    form(id='form' method='post' action='/edit/:username') 
+    form(id='form' method='post' action='/edit') 
         p Username:
             br
-            input(name='username' type='text')
+            input(name='username' type='text' value=session.username)
         p Email:
             br
-            input(name='email' type='text')
+            input(name='email' type='text' value=session.email)
         p Age: 
             br
-            input(name='age' type='text')   
+            input(name='age' type='text' value=session.age)   
         p New Password:
             br
-            input(name='password' type='text' value=user.password)
+            input(name='password' type='text')
         p What is your favorite primary color?
-            select(name="colors" id ='category1')
+            select(name="color" id ='category1')
                 option(name='Red') Red
                 option(name='Blue') Blue
                 option(value='Yellow') Yellow
-                option(value="I hate colors") I hate colors
+            p Currently : #{session.color}
         p What is your meal of the day?
             select(name="meal" id ='category2')
                 option(name='Breakfast') Breakfast
                 option(name='Lunch') Lunch
                 option(name='Dinner') Dinner
-        p Batman or Superman?
-            select(name='Batman or Superman' id ='category3')
+            p Currently : #{session.meal}
+        p Best SuperHero?
+            select(name='superhero' id ='category3')
                 option(name='Batman') Batman
                 option(name='Superman') Superman
                 option(name='Captain America') Captain America
+            p Currently : #{session.superhero}
         p
             input(type='submit' value='Save' id ='submit')        
         p Last Visited on #{cookie}
-        script(src='chart.js')
       

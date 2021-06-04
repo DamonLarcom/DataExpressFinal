@@ -15,12 +15,14 @@ app.use(expressSession({
     resave: true
 }))
 
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", 'pug');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const getAuth = (req, res, next) => {
-    if(res.session.user && res.session.user.isAuthenticated) {
+    if(req.session.user && req.session.user.isAuthenticated) {
         next();
     } else {
         res.redirect('/');
@@ -35,8 +37,8 @@ app.get('/', routes.login);
 app.post('/', urlencodedParser, routes.auth);
 app.get('/welcome', getAuth, routes.welcome);
 app.get('/signup', urlencodedParser, routes.signup);
-app.get('/edit/:username', urlencodedParser, routes.edit);
-app.post('/edit/:username', urlencodedParser, routes.editUser);
+app.get('/edit', urlencodedParser, routes.edit);
+app.post('/edit', urlencodedParser, routes.editUser);
 app.post('/create', urlencodedParser, routes.createUser);
 
 app.get('/api', routes.api);
