@@ -129,7 +129,7 @@ exports.editUser = (req, res) => {
             console.log(req.body.username + ' updated.')
         }
     });
-    res.redirect('/');
+    res.redirect('/welcome');
 }
 
 exports.api = (req, res) => {

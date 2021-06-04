@@ -3,11 +3,19 @@ html {
     color: #EAEAEA;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: auto;
+    background-image: linear-gradient(45deg,#1e1e1e,#4a4a4a);
+}
+
+h2 {
+    text-align: center;
 }
 
 form {
     background-color: #1e1e1e;
-    margin: auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 20px
+
 }
 
 #stats {
@@ -15,7 +23,11 @@ form {
 }
 
 #body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     background-color: #1e1e1e;
+    border-radius: 25px;
 
 }
 
@@ -24,8 +36,34 @@ p {
 }
 
 button {
-    border: 1px solid black;
-    border-radius: 15px;
-    background: linear-gradient(120deg, #121212, #EAEAEA);
-    padding: 5px;
+    border: 1px solid #383838;
+    border-radius: 5em;
+    color: #EAEAEA;
+    padding: 25px;
+    margin: 15px;
+
+    font-size: 24pt;
+
+    background-color: #0cbaba;
+    background-image: linear-gradient(45deg, #121212 0%, #595959 74%);
+
 }
+
+.containerDiv {
+    text-align: center;
+    background-color: #1e1e1e;
+    border-radius: 25px;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+}
+
+#rightSide {
+    flex:1;
+    flex-wrap: wrap;
+}
+
+
+

@@ -1,12 +1,18 @@
 extends layout 
 
 block content
-  div(id='body')
-    p 
-      td 
-        a(href='/edit') Update Information
-    p(id='stats') Statistics between users 
-    br
-    p
+  div(id='container')
+    div(id='body')
+      button(onclick="location.href='/edit'") Update Information
       button(onclick='location.href="/logout"') Log Out
-    p Last Visited on #{cookie} 
+      h2 Favorite superhero
+      canvas(id='superheroesCht')
+      h2 Favorite meal of the day
+      canvas(id='mealsCht')
+    div(id='rightSide' class='containerDiv')
+      h2 Favorite Color
+      canvas(id='colorsCht')
+      p Last Visited on #{cookie}
+      script(src='chart.js')
+      script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
